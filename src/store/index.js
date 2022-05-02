@@ -38,7 +38,6 @@ export default createStore({
   */
   mutations: {
     FETCHMOVIES(state, payload) {
-      // check that if state.listedMovies is full it needs to be reset
       if (state.listedMovies.length > 0) {
         state.listedMovies = [];
       }
@@ -65,7 +64,11 @@ export default createStore({
     }
   },
   /*
-    
+    This store makes usage of the following actions:
+      - fetchMovies which receives a payload parameter which is the given name of the searchbox section,
+        it will make a get request with the payload parameter to get an array of 10 movies with that name
+      - fetchMovieDetails which receives a payload parameter with the omdbID of a movie,
+        it will make a get request with the payload parameter to receive all data about that specific movie
   */
   actions:{
     fetchMovies({commit}, payload) {
