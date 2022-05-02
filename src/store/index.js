@@ -37,11 +37,15 @@ export default createStore({
       - CLOSEMOVIESDETAILS = to close the state.movieDetails (set the state back to null)
   */
   mutations: {
-    FETCHMOVIES(state, payload){
-      if (payload.Respone == 'True') {
-        console.log(payload);
-        state.listedMovies = payload;
-      } else if (payload.Respone == 'False') {
+    FETCHMOVIES(state, payload) {
+      // check that if state.listedMovies is full it needs to be reset
+      if (state.listedMovies.length > 0) {
+        state.listedMovies = [];
+      }
+      if (payload.Response == 'True') {
+        state.listedMovies = payload.Search;
+        console.log(state.listedMovies);
+      } else if (payload.Response == 'False') {
         state.error = payload.Error;
       }
     }
@@ -49,7 +53,13 @@ export default createStore({
     EMPTYLIST: state => {
       state.listedMovies = [];
     },
-    // FETCHMOVIESDETAILS,
+    FETCHMOVIESDETAILS(state, payload) {
+      if (payload.Response == 'True') {
+        state.movieDetails = payload;
+      } else if (payload.Response == 'False') {
+        state.error = payload.Error;
+      }
+    },
     CLOSEMOVIEDETAILS: state => {
       state.movieDetails = [];
     }
@@ -60,9 +70,16 @@ export default createStore({
   actions:{
     fetchMovies({commit}, payload) {
       axios
-        .get(`http://www.omdbapi.com/?s=${payload}&apikey=90713f32`)
+        .get(`http://www.omdbapi.com/?s=${payload}&apikey=4750d3ac`)
         .then(result => {
           commit('FETCHMOVIES', result.data);
+        })
+    },
+    fetchMovieDetails({commit}, payload) {
+      axios
+        .get(`http://www.omdbapi.com/?i=${payload}&apikey=4750d3ac`)
+        .then(result => {
+          commit('FETCHMOVIESDETAILS', result.data);
         })
     }
   }
