@@ -16,6 +16,7 @@
 .item {
   margin-top: 2rem;
   display: flex;
+  align-items: center;
 }
 
 .details {
@@ -34,10 +35,10 @@ i {
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
-  color: var(--color-heading);
+  color: #46d6d4;
 }
 
 @media (min-width: 1024px) {
