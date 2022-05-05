@@ -79,6 +79,7 @@ export default createStore({
         })
     },
     fetchMovieDetails({commit}, payload) {
+      console.log(payload);
       axios
         .get(`http://www.omdbapi.com/?i=${payload}&apikey=4750d3ac`)
         .then(result => {

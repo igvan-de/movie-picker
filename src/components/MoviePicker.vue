@@ -1,35 +1,36 @@
 <template>
 
     <section>
-        <h2>Search your movie</h2>
+        <h3>Search your movie</h3>
     </section>
 
     <!-- Input section to submit name of movie or serie -->
-    <section class="moviepicker">
-        <section class="searchbox-wrap">
+    <section class="moviePicker">
+        <div class="searchboxWrap">
             <input
-                type="text"
+                type="search"
                 placeholder="Search for a movie..."
                 class="searchbox"
-                v-model="searchTerm"
-                @keypress.enter="getMoviesList"
-            />
-
+                v-model="movieName"
+                @keypress.enter="getMoviesList">
             <button class="submit" @click="getMoviesList">      
                 <img src="../assets/loupe.png">
             </button>
-        </section>
+        </div>
 
         <!-- List of all the movies received from getMoviesList method function -->
-        <section>
-            <div class="listedMovie"
-             v-for="movie in listedMovies"
-            :key="movie.imdbID">
-                <img v-if="movie.Poster != 'N/A'" :src="movie.Poster">
-                <img v-else src="../assets/video-camera.png">
-                <p>{{ movie.Title }} - {{ movie.Type }} - {{ movie.Year }}</p>
-            </div>
-        </section>
+        <div>
+            <RouterLink to="/movie-details">
+                <div class="listedMovie"
+                v-for="movie in listedMovies"
+                :key="movie.imdbID"
+                @click="getMovieDetails(movie.imdbID)">
+                    <img v-if="movie.Poster != 'N/A'" :src="movie.Poster">
+                    <img v-else src="../assets/video-camera.png">
+                    <p>{{ movie.Title }} - {{ movie.Type }} - {{ movie.Year }}</p>
+                </div>
+            </RouterLink>
+        </div>
     </section>
     
 </template>
@@ -37,19 +38,19 @@
 <script>
 export default({
   data: () => ({
-      searchTerm: ""
+      movieName: ""
   }),
   /*
     Method function to create dispatch calls to set received data from api call in the state elements
      - getMoviesList sets state.listedMovie to received array of movies with certain name or title
-     - getMovieDetails sets state.movieDetails to object of received date of specific movie
+     - getMovieDetails sets state.movieDetails to object of received date of specific movie. The movieId parameter is to imdbID of the movie
   */
   methods: {
       getMoviesList: function() {
-          this.$store.dispatch("fetchMovies", this.searchTerm);
+          this.$store.dispatch("fetchMovies", this.movieName);
       },
-      getMovieDetails: function() {
-          this.$store.dispatch("fetchMovieDetails", this.searchTerm);
+      getMovieDetails: function(movieId) {
+          this.$store.dispatch("fetchMovieDetails", movieId);
       }
   },
   /*
@@ -58,14 +59,13 @@ export default({
   */
   computed: {
       listedMovies() {
-          console.log('movieList: ',this.$store.getters.listedMovies);
           return this.$store.getters.listedMovies;
       }
   }
 });
 </script>
-<style>
-h2 {
+<style scoped>
+h3 {
   font-size: 2.2rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
@@ -73,13 +73,13 @@ h2 {
 }
 
 
-.moviepicker {
+.moviePicker {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.searchbox-wrap {
+.searchboxWrap {
     display: flex;
     width: 100%;
     align-items: center;
@@ -101,17 +101,24 @@ h2 {
     }
 
     .submit {
+        display: flex;
         width: 2rem;
         height: 2rem;
-        border: 0rem;
+        border: 0.1rem solid white;
         border-radius: 1rem;
         margin-left: 1rem;
         background-color: rgba(0, 0, 0, 0);
+        align-items: center;
+        justify-content: center;
     }
 
         .submit img {
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 1.3rem;
+            height: 1.3rem;
+        }
+
+        .submit:hover {
+            transform: scale(110%);
         }
 
 .listedMovie {
@@ -135,6 +142,7 @@ h2 {
     .listedMovie p {
         font-size: 1rem;
         font-weight: bold;
+        color: white;
     }
 
 
