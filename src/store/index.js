@@ -31,19 +31,22 @@ export default createStore({
   },
   /* 
     In this store there a 4 mutations needed:
-      - FETCHMOVIES = to asign state.listedMovies the given given data fetched from the request in action
+      - FETCHMOVIES = to asign state.listedMovies the given given data fetched from the request in action and will check if state.listedMovies & state.error have a value and will set them back to empty state
       - EMPTYLIST   = to set sate.listedMovies back to an empty list
       - FETCHMOVIESDETAILS = to asign state.movieDetails the given data fetched from the request in actions
       - CLOSEMOVIESDETAILS = to close the state.movieDetails (set the state back to null)
   */
   mutations: {
     FETCHMOVIES(state, payload) {
+      console.log(payload);
       if (state.listedMovies.length > 0) {
         state.listedMovies = [];
       }
+      if (state.error.length > 0) {
+        state.error = "";
+      }
       if (payload.Response == 'True') {
         state.listedMovies = payload.Search;
-        console.log(state.listedMovies);
       } else if (payload.Response == 'False') {
         state.error = payload.Error;
       }
@@ -79,7 +82,6 @@ export default createStore({
         })
     },
     fetchMovieDetails({commit}, payload) {
-      console.log(payload);
       axios
         .get(`http://www.omdbapi.com/?i=${payload}&apikey=4750d3ac`)
         .then(result => {

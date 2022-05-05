@@ -1,46 +1,53 @@
 <template>
-    <!-- Section of whole component with all the related details of seleted movie -->
-    <section v-if="movie" class="movieDetails">
-        <div class="movieIMG">
-            <img v-if="movie.Poster != 'N/A'" :src="movie.Poster">
-            <img v-else src="../assets/video-camera.png">
-        </div>
-        <!-- The main details of a movie, like name, year of release and rating -->
-        <div class="mainDetails">
-            <h2>{{movie.Title}} - {{movie.Year}} 
-            <span class="rating" v-if="movie.imdbRating && movie.imdbRating != 'N/A'"> -<span class="star"></span>{{movie.imdbRating}}</span></h2>
-        </div>
-        <!-- Description of the movie -->
-        <div class="description">
-            <p v-if="movie.Plot && movie.Plot != 'N/A'">{{movie.Plot}}</p>
-        </div>
-        <!-- All extra details of a the movie, like genre, actors etc. All of them are also checked if the are in the movie object and if they are not empty -->
-        <div class="extraDetails">
-            <div v-if="movie.Genre && movie.Genre != 'N/A'" class="extraDetail">
-                <h3>Genre:</h3><p>{{movie.Genre}}</p>
+    <section class="mainBody">
+        <section class="closeSection">
+            <RouterLink to="/">
+                <img src="../assets/close.png">
+            </RouterLink>
+        </section>
+        <!-- Section of whole component with all the related details of seleted movie -->
+        <section v-if="movie" class="movieDetails">
+            <div class="movieIMG">
+                <img v-if="movie.Poster != 'N/A'" :src="movie.Poster">
+                <img v-else src="../assets/video-camera.png">
             </div>
-            <div v-if="movie.Released && movie.Released != 'N/A'" class="extraDetail">
-                <h3>Released:</h3><p>{{movie.Released}}</p>
+            <!-- The main details of a movie, like name, year of release and rating -->
+            <div class="mainDetails">
+                <h2>{{movie.Title}} - {{movie.Year}} 
+                <span class="rating" v-if="movie.imdbRating && movie.imdbRating != 'N/A'"> -<span class="star"></span>{{movie.imdbRating}}</span></h2>
             </div>
-            <div v-if="movie.Actors && movie.Actors != 'N/A'" class="extraDetail">
-                <h3>Actors:</h3><p>{{movie.Actors}}</p>
+            <!-- Description of the movie -->
+            <div class="description">
+                <p v-if="movie.Plot && movie.Plot != 'N/A'">{{movie.Plot}}</p>
             </div>
-            <div v-if="movie.Director && movie.Director != 'N/A'" class="extraDetail">
-                <h3>Director(s):</h3><p>{{movie.Director}}</p>
+            <!-- All extra details of a the movie, like genre, actors etc. All of them are also checked if the are in the movie object and if they are not empty -->
+            <div class="extraDetails">
+                <div v-if="movie.Genre && movie.Genre != 'N/A'" class="extraDetail">
+                    <h3>Genre:</h3><p>{{movie.Genre}}</p>
+                </div>
+                <div v-if="movie.Released && movie.Released != 'N/A'" class="extraDetail">
+                    <h3>Released:</h3><p>{{movie.Released}}</p>
+                </div>
+                <div v-if="movie.Actors && movie.Actors != 'N/A'" class="extraDetail">
+                    <h3>Actors:</h3><p>{{movie.Actors}}</p>
+                </div>
+                <div v-if="movie.Director && movie.Director != 'N/A'" class="extraDetail">
+                    <h3>Director(s):</h3><p>{{movie.Director}}</p>
+                </div>
+                <div v-if="movie.Writer && movie.Writer != 'N/A'" class="extraDetail">
+                    <h3>Writer(s):</h3><p>{{movie.Writer}}</p>
+                </div>
+                <div v-if="movie.Awards && movie.Awards != 'N/A'" class="extraDetail">
+                    <h3>Awards:</h3><p>{{movie.Awards}}</p>
+                </div>
+                <div v-if="movie.Language && movie.Language != 'N/A'" class="extraDetail">
+                    <h3>Language:</h3><p>{{movie.Language}}</p>
+                </div>
+                <div v-if="movie.BoxOffice && movie.BoxOffice != 'N/A'" class="extraDetail">
+                    <h3>BoxOffice:</h3><p>{{movie.BoxOffice}}</p>
+                </div>
             </div>
-            <div v-if="movie.Writer && movie.Writer != 'N/A'" class="extraDetail">
-                <h3>Writer(s):</h3><p>{{movie.Writer}}</p>
-            </div>
-            <div v-if="movie.Awards && movie.Awards != 'N/A'" class="extraDetail">
-                <h3>Awards:</h3><p>{{movie.Awards}}</p>
-            </div>
-            <div v-if="movie.Language && movie.Language != 'N/A'" class="extraDetail">
-                <h3>Language:</h3><p>{{movie.Language}}</p>
-            </div>
-            <div v-if="movie.BoxOffice && movie.BoxOffice != 'N/A'" class="extraDetail">
-                <h3>BoxOffice:</h3><p>{{movie.BoxOffice}}</p>
-            </div>
-        </div>
+        </section>
     </section>
 </template>
 <script>
@@ -54,7 +61,6 @@ export default ({
     */
     computed: {
         movie() {
-            console.log('details', this.$store.getters.movieDetails);
             return this.$store.getters.movieDetails;
         }
     }
@@ -65,6 +71,8 @@ export default ({
 .movieDetails {
     display: flex;
     flex-direction: column;
+    top: 6rem;
+    margin-bottom: 8rem;
 }
 
 .movieIMG {
@@ -82,7 +90,7 @@ export default ({
     }
 
 .mainDetails {
-    display: inline-block;
+    display: flex;
     width: 100%;
 }
 

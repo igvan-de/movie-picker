@@ -1,40 +1,43 @@
 <template>
+    <section class="mainBody">
+        <section>
+            <h3>Search your movie</h3>
+        </section>
 
-    <section>
-        <h3>Search your movie</h3>
-    </section>
+        <!-- Input section to submit name of movie or serie -->
+        <section class="moviePicker">
+            <div class="searchboxWrap">
+                <input
+                    type="search"
+                    placeholder="Search for a movie..."
+                    class="searchbox"
+                    v-model="movieName"
+                    @keypress.enter="getMoviesList">
+                <button class="submit" @click="getMoviesList">      
+                    <img src="../assets/loupe.png">
+                </button>
+            </div>
 
-    <!-- Input section to submit name of movie or serie -->
-    <section class="moviePicker">
-        <div class="searchboxWrap">
-            <input
-                type="search"
-                placeholder="Search for a movie..."
-                class="searchbox"
-                v-model="movieName"
-                @keypress.enter="getMoviesList">
-            <button class="submit" @click="getMoviesList">      
-                <img src="../assets/loupe.png">
-            </button>
-        </div>
-
-        <!-- List of all the movies received from getMoviesList method function -->
-        <div>
-            <RouterLink to="/movie-details">
-                <div class="listedMovie"
-                v-for="movie in listedMovies"
-                :key="movie.imdbID"
-                @click="getMovieDetails(movie.imdbID)">
-                    <img v-if="movie.Poster != 'N/A'" :src="movie.Poster">
-                    <img v-else src="../assets/video-camera.png">
-                    <p>{{ movie.Title }} - {{ movie.Type }} - {{ movie.Year }}</p>
+            <!-- List of all the movies received from getMoviesList method function -->
+            <div>
+                <RouterLink to="/movie-details">
+                    <div class="listedMovie"
+                    v-for="movie in listedMovies"
+                    :key="movie.imdbID"
+                    @click="getMovieDetails(movie.imdbID)">
+                        <img v-if="movie.Poster != 'N/A'" :src="movie.Poster">
+                        <img v-else src="../assets/video-camera.png">
+                        <p>{{ movie.Title }} - {{ movie.Type }} - {{ movie.Year }}</p>
+                    </div>
+                </RouterLink>
+                <!-- If there is an error in the search query then here will the error respone been displayed -->
+                <div v-if="error">
+                    <p>{{error}}</p>
                 </div>
-            </RouterLink>
-        </div>
+            </div>
+        </section>
     </section>
-    
 </template>
-
 <script>
 export default({
   data: () => ({
@@ -60,18 +63,22 @@ export default({
   computed: {
       listedMovies() {
           return this.$store.getters.listedMovies;
+      },
+      error() {
+          return this.$store.getters.error;
       }
   }
 });
 </script>
 <style scoped>
+/* @import '@assets/base.css'; */
+
 h3 {
   font-size: 2.2rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
   color: #46d6d4;
 }
-
 
 .moviePicker {
     display: flex;
@@ -88,24 +95,24 @@ h3 {
 .searchbox {
     width: 80%;
     height: 2.5rem;
-    border: 0rem solid black;
+    border: 0rem;
     border-radius: 0.5rem;
     padding: 1rem;
     box-shadow:4px 4px 10px rgba(6, 6, 6, 0.068);
 }
 
     .searchbox:focus {
-        border: 0rem solid black;
+        border: 0rem;
         background-color: white;
         color: black;
     }
 
     .submit {
         display: flex;
-        width: 2rem;
-        height: 2rem;
-        border: 0.1rem solid white;
-        border-radius: 1rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid #3c3c3ca8;
+        border-radius: 1.5rem;
         margin-left: 1rem;
         background-color: rgba(0, 0, 0, 0);
         align-items: center;
@@ -113,8 +120,8 @@ h3 {
     }
 
         .submit img {
-            width: 1.3rem;
-            height: 1.3rem;
+            width: 1.5rem;
+            height: 1.5rem;
         }
 
         .submit:hover {
@@ -133,8 +140,8 @@ h3 {
     }
 
     .listedMovie img {
-        width: 10rem;
-        height: 10rem;
+        width: 12rem;
+        height: 12rem;
         border-radius: 1rem;
         box-shadow:4px 4px 10px rgba(6, 6, 6, 0.068);
     }

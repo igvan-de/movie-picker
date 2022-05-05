@@ -1,120 +1,69 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
-    <!-- <img alt="Movie Picker logo" class="logo" src="@/assets/movie-picker-logo.png" width="125" height="125" /> -->
-
-    <div class="wrapper">
-      <HelloWorld msg="Movie Picker" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <!-- <RouterLink to="/about">About</RouterLink> -->
-        <RouterLink to="/movie-picker">Pick your own movie</RouterLink>
-      </nav>
-    </div>
+      <section class="welcome">
+        <div class="wrapper">
+            <h1>Movie Picker</h1>
+            <h3>
+              Search the next movie you want to see!
+            </h3>
+        </div>
+        <AboutView />
+      </section>
   </header>
-
   <RouterView />
 </template>
-
+<script setup>
+  import { RouterLink, RouterView } from 'vue-router'
+  import AboutView from '@/views/AboutView.vue'
+</script>
 <style>
 @import '@/assets/base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
-}
-
 header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: #46d6d4;
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    color: #5B8291;
-  }
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  body {
     display: flex;
+    flex-direction: column;
     place-items: center;
+    justify-content: center;
+    top: 9rem;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  padding-right: calc(160px / 2);
+  padding-left: calc(160px / 2);
+  gap: 5rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+  .wrapper h1 {
+    font-weight: 900;
+    font-size: 6rem;
+    top: -10px;
+    color: #46d6d4;
+    line-height: normal;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  .wrapper h3 {
+    font-size: 1.5rem;
   }
+
+@media (max-width: 1024px) {
 
   header {
+    top: 4rem;
+  }
+
+  .welcome {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0rem;
   }
 }
 </style>
