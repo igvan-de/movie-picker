@@ -38,7 +38,6 @@ export default createStore({
   */
   mutations: {
     FETCHMOVIES(state, payload) {
-      console.log(payload);
       if (state.listedMovies.length > 0) {
         state.listedMovies = [];
       }

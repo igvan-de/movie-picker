@@ -68,6 +68,8 @@ export default ({
 })
 </script>
 <style scoped>
+@import '../assets/base.css';
+
 
 .movieDetails {
     display: flex;

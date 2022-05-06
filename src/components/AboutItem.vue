@@ -1,4 +1,8 @@
 <template>
+  <!-- AboutItem component is layout for evry item in the about component
+      It asks for two refenrences when being used in another component, the icon and heading slots.
+      This advantage of this is that the AboutItem component is easy to reuse with different variables.
+   -->
   <div class="item">
     <i>
       <slot name="icon"></slot>
@@ -14,6 +18,8 @@
 <script>
 </script>
 <style scoped>
+@import '../assets/base.css';
+
 .item {
   margin-top: 2rem;
   display: flex;

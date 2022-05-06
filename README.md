@@ -1,14 +1,8 @@
 # movie-picker
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+This webapp is a single page that makes useage of a store, this to get easy acces in the whole app to the data requested by the user.
+The webapp has the functionalitty to search on title of a movie or serie. Which will display 10 movies/series.
+After clicking a movie of interrest you will be routed to a detailed page of the movie/serie.
 
 ## Project Setup
 
@@ -27,3 +21,15 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Preview movie-picker webapp
+
+```sh
+npm run preview
+```
+
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
