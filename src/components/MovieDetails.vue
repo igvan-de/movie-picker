@@ -19,6 +19,7 @@
             <!-- Description of the movie -->
             <div class="description">
                 <p v-if="movie.Plot && movie.Plot != 'N/A'">{{movie.Plot}}</p>
+                <hr/>
             </div>
             <!-- All extra details of a the movie, like genre, actors etc. All of them are also checked if the are in the movie object and if they are not empty -->
             <div class="extraDetails">
@@ -114,6 +115,15 @@ export default ({
         font-weight: 900;
     }
 
+.description hr {
+    height: 1px;
+    background-color: #31677d;
+    border: 1px solid #31677d;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .extraDetails {
     display: flex;
     flex-direction: column;
@@ -131,4 +141,9 @@ export default ({
             font-weight: 600;
         }
 
+@media (max-width: 1024px) {
+.movieDetails {
+    top:0;
+}
+}
 </style>

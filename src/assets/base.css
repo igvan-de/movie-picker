@@ -16,6 +16,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 .mainBody {
@@ -37,3 +38,21 @@ body {
     width: 2rem;
     height: 2rem;
   }
+
+@media (max-width: 1024px) {
+  .mainBody {
+    margin-top: 2rem;
+  }
+
+  .closeSection {
+    top: 0;
+  }
+}
+
+/* TODO: 
+  - make mobil responsive correct 
+  - make README.me
+  - test everything
+  - check all documentation
+  - make repo public and sent porject to e-sites
+*/

@@ -25,14 +25,15 @@
                     v-for="movie in listedMovies"
                     :key="movie.imdbID"
                     @click="getMovieDetails(movie.imdbID)">
+                    <!-- TODO: remove hyperLink underline!! -->
                         <img v-if="movie.Poster != 'N/A'" :src="movie.Poster">
                         <img v-else src="../assets/video-camera.png">
                         <p>{{ movie.Title }} - {{ movie.Type }} - {{ movie.Year }}</p>
                     </div>
                 </RouterLink>
                 <!-- If there is an error in the search query then here will the error respone been displayed -->
-                <div v-if="error">
-                    <p>{{error}}</p>
+                <div class="error" v-if="error">
+                    <img src="../assets/cancel.png"><p>{{error}}</p>
                 </div>
             </div>
         </section>
@@ -132,7 +133,7 @@ h3 {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
     .listedMovie:hover {
@@ -147,17 +148,49 @@ h3 {
     }
 
     .listedMovie p {
-        font-size: 1rem;
+        font-size: 1.3rem;
         font-weight: bold;
         color: white;
+
     }
 
+    .listedMovie:after {
+        content: ' ';
+        border: 1px solid #3c3c3ca8;
+        position: absolute;
+        /* left: calc(50% + 25px);; */
+        /* top:  */
+        bottom: -1rem;
+        width: 100%;
+    }
 
+    .listedMovie:last-of-type:after {
+        display: none;
+    }
 
+.error {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+    .error img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .error p {
+        color: #ED4337;
+        font-weight: 900;
+    }
+
+@media (max-width: 1024px) {
+.listedMovie img {
+    max-width: 8rem;
+}
+
+.listedMovie p {
+    font-size: 1rem;
+}
+}
 </style>
-/** 
-    requirements in this component:
-        - list of fetched movies after search request
-        - link to movieDetails component to view all data of cerntain movie
-        - 
-*/
